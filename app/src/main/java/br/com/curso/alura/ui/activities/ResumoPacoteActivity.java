@@ -1,5 +1,6 @@
 package br.com.curso.alura.ui.activities;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -14,16 +15,21 @@ import java.util.Calendar;
 
 import br.com.curso.alura.R;
 import br.com.curso.alura.model.Pacote;
+import br.com.curso.alura.util.DataUtil;
 import br.com.curso.alura.util.DiasUtil;
 import br.com.curso.alura.util.MoedaUtil;
 import br.com.curso.alura.util.ResourceUtil;
 
 public class ResumoPacoteActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR = "Resumo do pacote";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumo_pacote);
+
+        setTitle(TITULO_APPBAR);
 
         Pacote pacote = new Pacote("São Paulo", "sao_paulo_sp", 3, new BigDecimal(2339.99));
 
@@ -32,17 +38,14 @@ public class ResumoPacoteActivity extends AppCompatActivity {
         defineDias(pacote);
         defineValor(pacote);
         defineData(pacote);
+
+        Intent intent = new Intent(this, PagamentoPacoteActivity.class);
+        startActivity(intent);
     }
 
     private void defineData(Pacote pacote) {
         TextView dataHospedagem = findViewById(R.id.resumo_pacote_data);
-        Calendar dataHoje = Calendar.getInstance();
-        Calendar dataFinal = Calendar.getInstance();
-        dataFinal.add(Calendar.DATE, pacote.getDias());
-        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM");
-        String dataHojeFormatada = formataData.format(dataHoje.getTime());
-        String dataFinalFormatada = formataData.format(dataFinal.getTime());
-        String dataReservada = dataHojeFormatada + " - " + dataFinalFormatada + " de " + dataFinal.get(Calendar.YEAR);
+        String dataReservada = DataUtil.periodoEmTexto(pacote.getDias());
         dataHospedagem.setText(dataReservada);
     }
 
