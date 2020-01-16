@@ -2,6 +2,7 @@ package br.com.curso.alura.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -26,6 +27,9 @@ public class PagamentoPacoteActivity extends AppCompatActivity {
         setTitle(TITULO_APP_BAR);
 
         definePreco(pacote);
+
+        Intent intent = new Intent(this, ResumoCompraActivity.class);
+        startActivity(intent);
     }
 
     private void definePreco(Pacote pacote) {
