@@ -2,11 +2,13 @@ package br.com.curso.alura.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import br.com.curso.alura.R;
@@ -24,12 +26,18 @@ public class ResumoCompraActivity extends AppCompatActivity {
 
         setTitle("Resumo da compra");
 
-        Pacote pacote = new Pacote("São Paulo", "sao_paulo_sp", 3, new BigDecimal(2339.99));
+        carregaPacoteRecebido();
+    }
 
-        defineImagem(pacote);
-        defineCidade(pacote);
-        definePeriodo(pacote);
-        defineValor(pacote);
+    private void carregaPacoteRecebido() {
+        Intent intent = getIntent();
+        if(intent.hasExtra("pacote")){
+            Pacote pacote = (Pacote) intent.getSerializableExtra("pacote");
+            defineImagem(pacote);
+            defineCidade(pacote);
+            definePeriodo(pacote);
+            defineValor(pacote);
+        }
     }
 
     private void defineValor(Pacote pacote) {

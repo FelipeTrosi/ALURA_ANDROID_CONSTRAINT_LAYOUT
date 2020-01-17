@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_pacote_cadview"
+        android:id="@+id/item_pacote_cardview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
